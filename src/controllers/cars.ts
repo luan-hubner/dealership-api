@@ -1,8 +1,11 @@
-describe('Disponible cars functional tests', () => {
-  it('should return disponible cars', async () => {
-    const { body, status } = await global.testRequest.get('/cars');
-    expect(status).toBe(200);
-    expect(body).toEqual([
+import { Controller, Get } from '@overnightjs/core';
+import { Request, Response } from 'express';
+
+@Controller('cars')
+export class CarsController {
+  @Get('')
+  public getDisponibleCars(_: Request, res: Response): void {
+    res.send([
       {
         description: 'Corsa',
         brand: 'Chevrolet',
@@ -26,5 +29,5 @@ describe('Disponible cars functional tests', () => {
         img: 'https://www.google.com.br',
       },
     ]);
-  });
-});
+  }
+}
